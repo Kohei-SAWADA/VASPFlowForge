@@ -1,5 +1,9 @@
 # VASPFlowForge
 
+<p align="center">
+  <img src="assets/vaspflowforge-thumbnail.png" alt="PBE 構造緩和、HSE06 構造緩和、HSE06 DOS の流れを示す VASPFlowForge サムネイル">
+</p>
+
 <p align="right">
   <a href="README.md">English</a> |
   <strong>日本語</strong>

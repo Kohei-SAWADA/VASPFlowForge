@@ -1,5 +1,9 @@
 # VASPFlowForge
 
+<p align="center">
+  <img src="assets/vaspflowforge-thumbnail.png" alt="VASPFlowForge thumbnail showing the PBE relaxation, HSE06 relaxation, and HSE06 DOS workflow">
+</p>
+
 <p align="right">
   <strong>English</strong> |
   <a href="README_ja.md">日本語</a>
