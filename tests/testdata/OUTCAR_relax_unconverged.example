@@ -1,0 +1,4 @@
+ fake OUTCAR for tests: job ran to the end but ionic relaxation did NOT converge
+ (NSW exhausted; the convergence marker line is deliberately absent here)
+ General timing and accounting informations for this job:
+                  Elapsed time (sec):     9999.000

@@ -1,0 +1,47 @@
+SYSTEM = CHANGE_ME_hse06_relax
+
+! ---------- electronic minimisation ----------
+PREC   = Accurate
+! Keep ENCUT identical to the PBE stage.
+ENCUT  = 520
+EDIFF  = 1.0E-06
+NELM   = 200
+
+ISTART = 0
+ICHARG = 2
+
+ISPIN  = 1
+
+ISMEAR = 0
+SIGMA  = 0.05
+
+! ---------- ionic relaxation (cell + ions) ----------
+IBRION = 2
+NSW    = 120
+ISIF   = 3
+POTIM  = 0.3
+EDIFFG = -0.03
+
+! ---------- functional: HSE06 ----------
+GGA      = PE
+LHFCALC  = .TRUE.
+HFSCREEN = 0.2
+AEXX     = 0.25
+ALGO     = Damped
+TIME     = 0.4
+PRECFOCK = Fast
+
+! ---------- accuracy helpers ----------
+LREAL  = .FALSE.
+LASPH  = .TRUE.
+ADDGRID = .TRUE.
+LMAXMIX = 4
+
+! ---------- parallelisation (machine dependent) ----------
+! USER_CHECK_REQUIRED: tune for your workstation.
+! KPAR  = 2
+! NCORE = 4
+
+! WAVECAR is kept: the DOS stage can reuse it when KPOINTS are identical.
+LWAVE  = .TRUE.
+LCHARG = .TRUE.

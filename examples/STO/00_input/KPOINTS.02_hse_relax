@@ -1,0 +1,5 @@
+STO 5-atom cubic HSE06 relax; lighter mesh than PBE to limit hybrid cost; CONVERGENCE_REQUIRED by convergence test
+0
+Gamma
+4 4 4
+0 0 0

@@ -1,0 +1,46 @@
+SYSTEM = SrTiO3_cubic_5atom_pbe_relax
+
+! ---------- electronic minimisation ----------
+PREC   = Accurate
+! ENCUT should be >= 1.3 * max(ENMAX) over your POTCAR entries.
+! 520 eV suits many O-containing oxides; CONVERGENCE_REQUIRED for your system.
+ENCUT  = 520
+EDIFF  = 1.0E-06
+NELM   = 160
+
+ISTART = 0
+ICHARG = 2
+
+! Spin: for magnetic systems set ISPIN = 2 and add a MAGMOM line.
+ISPIN  = 1
+
+! Smearing: ISMEAR = 0 (Gaussian) is safe for insulators/semiconductors.
+ISMEAR = 0
+SIGMA  = 0.05
+
+! ---------- ionic relaxation (cell + ions) ----------
+IBRION = 2
+NSW    = 160
+ISIF   = 3
+POTIM  = 0.3
+EDIFFG = -0.03
+
+! ---------- functional: PBE ----------
+GGA    = PE
+ALGO   = Normal
+
+! ---------- accuracy helpers ----------
+LREAL  = .FALSE.
+LASPH  = .TRUE.
+ADDGRID = .TRUE.
+LMAXMIX = 4
+
+! ---------- parallelisation (machine dependent) ----------
+! USER_CHECK_REQUIRED: tune for your workstation. KPAR should divide the number
+! of irreducible k-points; NCORE should divide the cores per node.
+! KPAR  = 2
+! NCORE = 4
+
+! Keep wavefunctions/charge for possible reuse by later stages.
+LWAVE  = .TRUE.
+LCHARG = .TRUE.

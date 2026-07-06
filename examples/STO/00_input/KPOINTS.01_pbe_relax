@@ -1,0 +1,5 @@
+STO 5-atom cubic PBE relax; |a* b* c*| = 0.2565 0.2565 0.2565 1/A; initial guess, CONVERGENCE_REQUIRED by convergence test
+0
+Gamma
+6 6 6
+0 0 0

@@ -1,0 +1,5 @@
+ fake OUTCAR for tests: relaxation finished AND converged
+ (only the lines relevant to completion checking are reproduced)
+ reached required accuracy - stopping structural energy minimisation
+ General timing and accounting informations for this job:
+                  Elapsed time (sec):     1285.300

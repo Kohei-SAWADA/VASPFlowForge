@@ -1,0 +1,28 @@
+# pipeline.conf - configuration for run_pbe_hse_dos_pipeline.sh
+# This file is sourced by bash from the case directory. Keep it to simple
+# module setup and variable assignments (it is executed as shell code by
+# YOUR shell).
+
+# REQUIRED: how to launch VASP on this machine. The pipeline executes this
+# command inside each stage directory (stdout -> vasp.out, stderr -> vasp.err).
+#
+# CPU module environment: VASP 6.4.3
+#   module load intel
+#   module load impi
+#   module load vasp
+#   VASP_CMD="mpirun -np 16 vasp_std"
+#
+# GPU module environment: VASP-GPU 6.4.3
+#   module load nvidia
+#   module load nvompi
+#   module load vasp-gpu
+#   VASP_CMD="mpirun -np 4 vasp_std"
+#
+# Replace vasp_std if your module exposes a different executable name.
+VASP_CMD="mpirun -np 16 vasp_std"
+
+# WAVECAR reuse for the DOS stage:
+#   auto  - reuse the stage-02 WAVECAR only when KPOINTS of stages 02 and 03
+#           are identical (then ISTART=1 / ICHARG=0 is set automatically)
+#   never - always start the DOS run from scratch (ISTART=0 / ICHARG=2)
+REUSE_WAVECAR_FOR_DOS="auto"

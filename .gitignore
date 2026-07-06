@@ -1,0 +1,55 @@
+# ============================================================
+# VASP licensed material - MUST NEVER be committed or published
+# ============================================================
+POTCAR
+POTCAR.*
+# POTCAR.spec is a plain-text specification (no pseudopotential data) and is allowed:
+!POTCAR.spec
+
+# ============================================================
+# VASP outputs (large and/or regenerable)
+# ============================================================
+WAVECAR
+CHGCAR
+CHG
+OUTCAR
+OSZICAR
+CONTCAR
+vasprun.xml
+DOSCAR
+EIGENVAL
+PROCAR
+XDATCAR
+IBZKPT
+PCDAT
+REPORT
+LOCPOT
+ELFCAR
+PROOUT
+PARCHG*
+TMPCAR
+STOPCAR
+WFULL*
+vasp.out
+vasp.err
+
+# ============================================================
+# Pipeline-generated stage directories and state files
+# ============================================================
+01_pbe_relax/
+02_hse_relax/
+03_hse_dos/
+pipeline_status.tsv
+POSCAR.provenance.txt
+
+# ============================================================
+# Test scratch area
+# ============================================================
+tests/tmp/
+
+# ============================================================
+# OS / editor noise
+# ============================================================
+.DS_Store
+*~
+*.swp

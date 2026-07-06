@@ -1,0 +1,4 @@
+ fake OUTCAR for tests: static (DOS) run finished normally
+ (static runs are not required to contain "reached required accuracy")
+ General timing and accounting informations for this job:
+                  Elapsed time (sec):      432.100
