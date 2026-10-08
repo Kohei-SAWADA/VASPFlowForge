@@ -1,13 +1,39 @@
 # VASPFlowForge
 
-<p align="center">
-  <img src="assets/vaspflowforge-thumbnail.png" alt="PBE 構造緩和、HSE06 構造緩和、HSE06 DOS の流れを示す VASPFlowForge サムネイル">
-</p>
-
 <p align="right">
   <a href="README.md">English</a> |
   <strong>日本語</strong>
 </p>
+
+**PBE → HSE06 → DOSワークフローを自動化。**
+
+読みやすいBashスクリプトで、PBE構造緩和 → HSE06構造緩和 → HSE06 DOSを実行。入力の事前確認、各段階のチェック、構造の引き継ぎと再開に対応します。
+
+**[ソースコードをダウンロード](https://github.com/Kohei-SAWADA/VASPFlowForge/archive/refs/heads/main.zip)** · [Quick Start／使い方](#使い方) · [必要環境](#必要環境) · [mock検証](#mock検証)
+
+バイナリアプリではなく、ソースコードのワークフローです。本計算にはLinuxと、別途ライセンスされたVASP・PAWデータが必要です。VASP実行ファイルとライセンス対象のPOTCARは同梱しません。
+
+## mock検証
+
+macOS上で既存のfake VASPと合成fixtureを使い、実スクリプトを確認しました。**48テスト成功・失敗0件**で、PBE → HSE06 → DOSの各段階が完了しています。VASPの物理計算や科学的結果の検証ではありません。`bash tests/run_tests.sh`で再現できます。[テストの詳細](#テスト)をご覧ください。
+
+[テスト出力（テキスト）](assets/promo/vaspflowforge-tests.txt) · [mock実行ログ（テキスト）](assets/promo/vaspflowforge-mock-run.txt)
+
+これらのテキストはワークフローの動作確認で、実際のDFT計算ではありません。
+
+## 主な機能
+
+- 入力の事前確認と、実行前のdry-run計画。
+- OUTCARの完了・収束チェックと、CONTCAR → POSCARの引き継ぎ。
+- 失敗時の停止と段階別ログ。再実行時は完了済みの段階をスキップ。
+
+[ワークフローの詳細](#目的) · [POTCAR方針](docs/potcar_policy_ja.md) · [ライセンス](#ライセンス)
+
+<p align="center">
+  <img src="assets/vaspflowforge-thumbnail.png" alt="PBE 構造緩和、HSE06 構造緩和、HSE06 DOS の流れを示す VASPFlowForge サムネイル">
+</p>
+
+
 
 **一括実行パイプライン: PBE 構造緩和 -> HSE06 構造緩和 -> HSE06 DOS。**
 

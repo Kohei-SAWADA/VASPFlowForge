@@ -1,13 +1,39 @@
 # VASPFlowForge
 
-<p align="center">
-  <img src="assets/vaspflowforge-thumbnail.png" alt="VASPFlowForge thumbnail showing the PBE relaxation, HSE06 relaxation, and HSE06 DOS workflow">
-</p>
-
 <p align="right">
   <strong>English</strong> |
   <a href="README_ja.md">日本語</a>
 </p>
+
+**Automate PBE → HSE06 → DOS Workflows.**
+
+Run PBE relaxation → HSE06 relaxation → HSE06 DOS with readable Bash scripts, input preflight, stage checks, and resumable structure handoffs.
+
+**[Download Source Code](https://github.com/Kohei-SAWADA/VASPFlowForge/archive/refs/heads/main.zip)** · [Quick Start](#quick-start) · [Requirements](#requirements) · [Mock validation](#mock-validation)
+
+This is a source workflow, not a packaged binary application. Production calculations require Linux and separately licensed VASP and PAW data. VASP executables and licensed POTCAR files are not included.
+
+## Mock validation
+
+The real scripts were checked on macOS with the existing fake-VASP runner and synthetic fixtures: **48 tests passed, 0 failed**, with PBE → HSE06 → DOS stage completion. These checks do not run VASP physics or validate scientific results. Reproduce them with `bash tests/run_tests.sh`; see [test details](#tests).
+
+[Test output (text)](assets/promo/vaspflowforge-tests.txt) · [Mock-run trace (text)](assets/promo/vaspflowforge-mock-run.txt)
+
+These text traces are workflow checks, not a real DFT calculation.
+
+## Main features
+
+- Input preflight and a dry-run plan before launching stages.
+- OUTCAR completion/convergence gates and CONTCAR → POSCAR handoffs.
+- Failure stops and stage logs; completed stages are skipped on rerun.
+
+[Workflow details](#purpose) · [POTCAR policy](docs/potcar_policy.md) · [License](#license)
+
+<p align="center">
+  <img src="assets/vaspflowforge-thumbnail.png" alt="VASPFlowForge thumbnail showing the PBE relaxation, HSE06 relaxation, and HSE06 DOS workflow">
+</p>
+
+
 
 **One-command VASP workflow: PBE relaxation -> HSE06 relaxation -> HSE06 DOS.**
 
