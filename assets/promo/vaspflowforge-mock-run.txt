@@ -1,0 +1,50 @@
+VASPFlowForge main 234b618746e44e3bef540ed09013732d795d51d7
+Actual macOS script execution with synthetic fixtures and existing fake VASP.
+No VASP physics calculation or scientific validation. Paths normalized to <scratch>.
+
+$ head -n 1 tests/tmp/case_dryrun/00_input/POTCAR
+FAKE POTCAR FOR PIPELINE TESTS ONLY - contains no pseudopotential data
+
+$ bash scripts/preflight_check.sh tests/tmp/case_dryrun
+preflight: element order OK: Sr Ti O
+preflight: all checks passed for tests/tmp/case_dryrun
+
+$ bash scripts/run_pbe_hse_dos_pipeline.sh --dry-run tests/tmp/case_dryrun
+[2026-10-09 04:04:06] config loaded: <scratch>/tests/tmp/case_dryrun/pipeline.conf
+preflight: element order OK: Sr Ti O
+preflight: all checks passed for <scratch>/tests/tmp/case_dryrun
+== dry run: plan for case <scratch>/tests/tmp/case_dryrun ==
+  VASP_CMD              : "<scratch>/tests/bin/fake_vasp.sh"
+  REUSE_WAVECAR_FOR_DOS : auto
+  stage 01_pbe_relax  mode=relax  POSCAR <- 00_input/POSCAR  [not run yet]
+  stage 02_hse_relax  mode=relax  POSCAR <- 01_pbe_relax/CONTCAR  [not run yet]
+  stage 03_hse_dos  mode=static  POSCAR <- 02_hse_relax/CONTCAR  [not run yet]
+== dry run: inputs valid; no files were created or modified ==
+
+$ bash scripts/run_pbe_hse_dos_pipeline.sh tests/tmp/case_dryrun
+[2026-10-09 04:04:06] config loaded: <scratch>/tests/tmp/case_dryrun/pipeline.conf
+preflight: element order OK: Sr Ti O
+preflight: all checks passed for <scratch>/tests/tmp/case_dryrun
+[2026-10-09 04:04:06] pipeline start: <scratch>/tests/tmp/case_dryrun
+[2026-10-09 04:04:06] PREP  01_pbe_relax
+[2026-10-09 04:04:06] RUN   01_pbe_relax: "<scratch>/tests/bin/fake_vasp.sh"
+OK: relaxation in <scratch>/tests/tmp/case_dryrun/01_pbe_relax finished and converged
+[2026-10-09 04:04:06] DONE  01_pbe_relax
+[2026-10-09 04:04:06] PREP  02_hse_relax
+promote_contcar.sh: <scratch>/tests/tmp/case_dryrun/01_pbe_relax/CONTCAR -> <scratch>/tests/tmp/case_dryrun/02_hse_relax/POSCAR
+[2026-10-09 04:04:06] RUN   02_hse_relax: "<scratch>/tests/bin/fake_vasp.sh"
+OK: relaxation in <scratch>/tests/tmp/case_dryrun/02_hse_relax finished and converged
+[2026-10-09 04:04:06] DONE  02_hse_relax
+[2026-10-09 04:04:06] PREP  03_hse_dos
+promote_contcar.sh: <scratch>/tests/tmp/case_dryrun/02_hse_relax/CONTCAR -> <scratch>/tests/tmp/case_dryrun/03_hse_dos/POSCAR
+[2026-10-09 04:04:07] DOS: starting from scratch (ISTART=0, ICHARG=2)
+[2026-10-09 04:04:07] RUN   03_hse_dos: "<scratch>/tests/bin/fake_vasp.sh"
+OK: static run in <scratch>/tests/tmp/case_dryrun/03_hse_dos finished normally
+[2026-10-09 04:04:07] DONE  03_hse_dos
+[2026-10-09 04:04:07] ALL STAGES COMPLETE
+[2026-10-09 04:04:07] results:
+[2026-10-09 04:04:07]   relaxed PBE structure   : <scratch>/tests/tmp/case_dryrun/01_pbe_relax/CONTCAR
+[2026-10-09 04:04:07]   relaxed HSE06 structure : <scratch>/tests/tmp/case_dryrun/02_hse_relax/CONTCAR
+[2026-10-09 04:04:07]   DOS outputs             : <scratch>/tests/tmp/case_dryrun/03_hse_dos/{DOSCAR,vasprun.xml}
+[2026-10-09 04:04:07]   status history          : <scratch>/tests/tmp/case_dryrun/pipeline_status.tsv
+

@@ -1,0 +1,56 @@
+VASPFlowForge main 234b618746e44e3bef540ed09013732d795d51d7
+Actual macOS script execution with synthetic fixtures and existing fake VASP.
+No VASP physics calculation or scientific validation. Paths normalized to <scratch>.
+
+== unit: check_vasp_done.sh ==
+ok 1 - relax converged + CONTCAR -> 0
+ok 2 - relax converged but CONTCAR missing -> 3
+ok 3 - relax finished but unconverged -> 2
+ok 4 - incomplete OUTCAR (no footer) -> 1
+ok 5 - missing OUTCAR -> 3
+ok 6 - static finished -> 0
+ok 7 - static incomplete -> 1
+ok 8 - usage error -> 3
+== unit: promote_contcar.sh ==
+ok 9 - valid CONTCAR promoted -> 0
+ok 10 - POSCAR identical to CONTCAR
+ok 11 - provenance file written
+ok 12 - empty CONTCAR rejected -> 1
+ok 13 - no POSCAR written on rejection
+ok 14 - missing CONTCAR rejected -> 1
+== integration: pipeline with fake VASP ==
+ok 15 - dry run exits 0
+ok 16 - dry run created no stage dir
+ok 17 - dry run created no status file
+ok 18 - full pipeline run exits 0
+ok 19 - stage 01 OUTCAR exists
+ok 20 - stage 02 OUTCAR exists
+ok 21 - stage 03 OUTCAR exists
+ok 22 - 02 POSCAR == 01 CONTCAR
+ok 23 - 03 POSCAR == 02 CONTCAR
+ok 24 - provenance recorded in 02
+ok 25 - pipeline DONE recorded
+ok 26 - DOS from scratch (ISTART = 0) since KPOINTS differ
+ok 27 - no WAVECAR link in 03
+ok 28 - rerun of finished case exits 0
+ok 29 - rerun skipped all three stages
+ok 30 - pipeline (identical 02/03 KPOINTS) exits 0
+ok 31 - WAVECAR linked into 03
+ok 32 - ISTART switched to 1 for reuse
+ok 33 - ICHARG switched to 0 for reuse
+ok 34 - unconverged stage 02 -> pipeline exits 1
+ok 35 - stage 03 never created after failure
+ok 36 - FAILED recorded for stage 02
+ok 37 - rerun with stale failed stage still exits 1
+ok 38 - after removing failed stage, pipeline completes
+ok 39 - stage 01 was skipped on resume
+ok 40 - stage 03 completed on resume
+ok 41 - crash in stage 01 -> pipeline exits 1
+ok 42 - stage 02 never created after crash
+ok 43 - missing POTCAR -> preflight failure (rc=2)
+ok 44 - nothing was run without POTCAR
+ok 45 - dry run without POTCAR -> rc=2
+ok 46 - dry run still prints the plan without POTCAR
+ok 47 - dry run without POTCAR created nothing
+ok 48 - POSCAR/POTCAR order mismatch -> rc=2
+== summary: 48 passed, 0 failed, 48 total ==
